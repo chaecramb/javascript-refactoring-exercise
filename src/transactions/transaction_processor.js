@@ -5,17 +5,16 @@ function sortAndQuantifyTransactions(transActions) {
     throw new Error("Undefined collection of transactions");
   }
 
-  let txCount = {};
+  let transactionCount = transActions.reduce((countObject, transaction) => {
+    countObject[transaction] = (countObject[transaction] || 0) + 1;
+    return countObject;
+  }, {});
 
-  transActions.forEach((trans) => {
-    txCount[trans] ? (txCount[trans] += 1) : (txCount[trans] = 1);
-  });
-
-  txCount = sortByAmountThenName(txCount);
+  transactionCount = sortByAmountThenName(transactionCount);
 
   // Place them back in array for returning
-  Object.keys(txCount).forEach((key, index) => {
-    result[index] = `${key} ${txCount[key]}`;
+  Object.keys(transactionCount).forEach(function (key, index) {
+    result[index] = `${key} ${transactionCount[key]}`;
   });
 
   return result;
