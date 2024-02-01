@@ -1,4 +1,4 @@
-function processTransactions(transActions) {
+function sortAndQuantifyTransactions(transActions) {
   const result = [];
 
   if (!validateTransactions(transActions)) {
@@ -22,10 +22,7 @@ function processTransactions(transActions) {
 }
 
 function sortByAmountThenName(txCount) {
-  let sortedKeys = Object.keys(txCount).sort(function sortingFunction(
-    itemOne,
-    itemTwo
-  ) {
+  let sortedKeys = Object.keys(txCount).sort((itemOne, itemTwo) => {
     return (
       txCount[itemTwo] - txCount[itemOne] ||
       itemOne > itemTwo ||
@@ -34,9 +31,9 @@ function sortByAmountThenName(txCount) {
   });
 
   let sortedResults = {};
-  for (let objectKey of sortedKeys) {
+  sortedKeys.forEach((objectKey) => {
     sortedResults[objectKey] = txCount[objectKey];
-  }
+  });
 
   return sortedResults;
 }
@@ -49,4 +46,4 @@ function validateTransactions(transactions) {
   return true;
 }
 
-module.exports = processTransactions;
+module.exports = sortAndQuantifyTransactions;
