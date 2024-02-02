@@ -13,7 +13,7 @@ function sortAndQuantifyTransactions(transActions) {
   transactionCount = sortByAmountThenName(transactionCount);
 
   // Place them back in array for returning
-  Object.keys(transactionCount).forEach(function (key, index) {
+  Object.keys(transactionCount).forEach((key, index) => {
     result[index] = `${key} ${transactionCount[key]}`;
   });
 
